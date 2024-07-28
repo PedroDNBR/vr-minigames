@@ -9,7 +9,7 @@ public class VRMiniGame : ModuleRules
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
        // PrivatePCHHeaderFile = "Private/WindowsMixedRealityPrecompiled.h";
 
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "AdvancedSessions", "VRExpansionPlugin", "ProceduralMeshComponent" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "AdvancedSessions", "VRExpansionPlugin", "ProceduralMeshComponent", "SlateCore" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
