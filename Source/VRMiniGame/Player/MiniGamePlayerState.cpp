@@ -1,5 +1,5 @@
 #include "MiniGamePlayerState.h"
-#include "MiniGameGameState.h"
+#include "VRMiniGame/Player/GameState/MiniGameGameState.h"
 #include "Kismet/GameplayStatics.h"
 
 void AMiniGamePlayerState::BeginPlay()

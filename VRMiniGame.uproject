@@ -11,7 +11,8 @@
 			"AdditionalDependencies": [
 				"Engine",
 				"VRExpansionPlugin",
-				"UMG"
+				"UMG",
+				"AdvancedSessions"
 			]
 		}
 	],

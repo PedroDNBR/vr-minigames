@@ -16,6 +16,6 @@ public:
 	UPROPERTY(EditAnywhere)
 	class USceneComponent* Root;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UWidgetComponent* PointsWidget;
 };
