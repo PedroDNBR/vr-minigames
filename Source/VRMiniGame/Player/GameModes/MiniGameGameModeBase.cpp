@@ -6,6 +6,19 @@ void AMiniGameGameModeBase::PlayerLodaded()
 	ServerPlayerLodaded();
 }
 
+void AMiniGameGameModeBase::StartMiniGameMatch()
+{
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(
+			-1,
+			15.f,
+			FColor::Green,
+			"StartMiniGameMatch"
+		);
+	}
+}
+
 void AMiniGameGameModeBase::ServerPlayerLodaded_Implementation()
 {
 	UMiniGameGameInstance* MiniGameGameInstance = Cast<UMiniGameGameInstance>(GetGameInstance());
@@ -25,5 +38,6 @@ void AMiniGameGameModeBase::ServerPlayerLodaded_Implementation()
 				"Bateu a quatidade"
 			);
 		}
+		StartMiniGameMatch();
 	}
 }

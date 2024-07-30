@@ -9,4 +9,7 @@ class VRMINIGAME_API AWhackAMoleGameMode : public AMiniGameGameModeBase
 {
 	GENERATED_BODY()
 
+public:
+	virtual void StartMiniGameMatch() override;
+
 };

@@ -16,6 +16,8 @@ public:
 	UFUNCTION(Server, Reliable)
 	void ServerPlayerLodaded();
 
+	virtual void StartMiniGameMatch();
+
 private:
 	int32 LoadedPlayersQuantity;
 
