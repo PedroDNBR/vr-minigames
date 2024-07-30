@@ -26,4 +26,5 @@ public:
 	TMap<FString, bool> ModesAvailable;
 
 	void StartRandomMiniGame();
+
 };
