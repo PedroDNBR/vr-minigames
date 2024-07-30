@@ -1,20 +1,30 @@
 #include "WhackAMoleGameMode.h"
+#include "VRMiniGame/Game/MiniGameGameInstance.h"
 
-void AWhackAMoleGameMode::HandleSeamlessTravelPlayer(AController*& C)
+void AWhackAMoleGameMode::PlayerLodaded()
 {
-	if (GEngine)
+	ServerPlayerLodaded();
+}
+
+void AWhackAMoleGameMode::ServerPlayerLodaded_Implementation()
+{
+	UMiniGameGameInstance* MiniGameGameInstance = Cast<UMiniGameGameInstance>(GetGameInstance());
+
+	LoadedPlayersQuantity++;
+
+	if (MiniGameGameInstance == nullptr || !MiniGameGameInstance) return;
+
+	if (LoadedPlayersQuantity >= MiniGameGameInstance->PlayersInGameWhenMatchStarted)
 	{
-		GEngine->AddOnScreenDebugMessage(
-			-1,
-			15.f,
-			FColor::Green,
-			"Mudou de cena"
-		);
-		GEngine->AddOnScreenDebugMessage(
-			-1,
-			15.f,
-			FColor::Green,
-			C->GetName()
-		);
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(
+				-1,
+				15.f,
+				FColor::Green,
+				"Bateu a quatidade"
+			);
+		}
 	}
+
 }

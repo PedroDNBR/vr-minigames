@@ -10,6 +10,13 @@ class VRMINIGAME_API AWhackAMoleGameMode : public AGameMode
 	GENERATED_BODY()
 	
 public:
-	virtual void HandleSeamlessTravelPlayer(AController*& C) override;
+	UFUNCTION(BlueprintCallable)
+	void PlayerLodaded();
+
+	UFUNCTION(Server, Reliable)
+	void ServerPlayerLodaded();
+
+private:
+	int32 LoadedPlayersQuantity;
 
 };
