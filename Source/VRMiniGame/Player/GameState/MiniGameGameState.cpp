@@ -42,7 +42,6 @@ void AMiniGameGameState::StartRandomMiniGame()
 			MapName.ToString()
 		);
 	}
-	// UGameplayStatics::OpenLevel(this, MapName, false, "listen");
 
 	AGameMode* GameMode = GetWorld()->GetAuthGameMode<AGameMode>();
 

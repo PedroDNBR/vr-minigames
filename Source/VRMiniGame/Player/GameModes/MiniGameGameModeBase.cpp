@@ -19,6 +19,35 @@ void AMiniGameGameModeBase::StartMiniGameMatch()
 	}
 }
 
+void AMiniGameGameModeBase::Tick(float DeltaTime)
+{
+	if (bStartCountdown)
+	{
+		CountdownTime = MiniGameStartTime - GetWorld()->GetTimeSeconds() + LevelStartingTime;
+		if (GEngine && CountdownTime <= 6)
+		{
+			GEngine->AddOnScreenDebugMessage(
+				-1,
+				2.f,
+				FColor::Green,
+				FString::Printf(TEXT("%f"), CountdownTime)
+			);
+		}
+		if (CountdownTime <= 0.f)
+		{
+			StartMiniGameMatch();
+			bStartCountdown = false;
+		}
+	}
+}
+
+void AMiniGameGameModeBase::BeginPlay()
+{
+	Super::BeginPlay();
+
+	LevelStartingTime = GetWorld()->GetTimeSeconds();
+}
+
 void AMiniGameGameModeBase::ServerPlayerLodaded_Implementation()
 {
 	UMiniGameGameInstance* MiniGameGameInstance = Cast<UMiniGameGameInstance>(GetGameInstance());
@@ -38,6 +67,6 @@ void AMiniGameGameModeBase::ServerPlayerLodaded_Implementation()
 				"Bateu a quatidade"
 			);
 		}
-		StartMiniGameMatch();
+		bStartCountdown = true;
 	}
 }
