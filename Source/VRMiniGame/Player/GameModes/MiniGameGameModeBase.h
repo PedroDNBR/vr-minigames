@@ -4,6 +4,8 @@
 #include "GameFramework/GameMode.h"
 #include "MiniGameGameModeBase.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FStartTimer);
+
 UCLASS()
 class VRMINIGAME_API AMiniGameGameModeBase : public AGameMode
 {
@@ -18,16 +20,16 @@ public:
 
 	virtual void StartMiniGameMatch();
 
-	virtual void Tick(float DeltaTime) override;
-
-protected:
-	virtual void BeginPlay() override;
-
 	UPROPERTY(EditAnywhere)
 	float MiniGameStartTime = 10.f;
 
 	float LevelStartingTime = 0.f;
-	float CountdownTime = 0.f;
+
+	UPROPERTY(BlueprintAssignable)
+	FStartTimer StartTimer;
+
+protected:
+	virtual void BeginPlay() override;
 
 	bool bStartCountdown = false;
 
@@ -35,4 +37,7 @@ protected:
 private:
 	int32 LoadedPlayersQuantity;
 
+
+public:
+	FORCEINLINE bool GetStartCountdown() { return bStartCountdown; }
 };

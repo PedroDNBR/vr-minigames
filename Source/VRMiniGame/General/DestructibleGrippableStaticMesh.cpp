@@ -39,15 +39,6 @@ void ADestructibleGrippableStaticMesh::OnHit(UPrimitiveComponent* HitComponent, 
 	AGrippableStaticMeshActor* Grippable = Cast<AGrippableStaticMeshActor>(OtherActor);
 	if (Grippable && ProceduralMesh)
 	{
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(
-				-1,
-				15.f,
-				FColor::Green,
-				"aaaaa"
-			);
-		}
 		UProceduralMeshComponent* Otherhalf;
 		UKismetProceduralMeshLibrary::SliceProceduralMesh(
 			ProceduralMesh,

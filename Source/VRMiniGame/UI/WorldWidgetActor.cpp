@@ -4,6 +4,7 @@
 AWorldWidgetActor::AWorldWidgetActor()
 {
 	bReplicates = true;
+	PrimaryActorTick.bCanEverTick = true;
 	Root = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
 	SetRootComponent(Root);
 

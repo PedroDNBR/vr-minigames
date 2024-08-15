@@ -19,28 +19,6 @@ void AMiniGameGameModeBase::StartMiniGameMatch()
 	}
 }
 
-void AMiniGameGameModeBase::Tick(float DeltaTime)
-{
-	if (bStartCountdown)
-	{
-		CountdownTime = MiniGameStartTime - GetWorld()->GetTimeSeconds() + LevelStartingTime;
-		if (GEngine && CountdownTime <= 6)
-		{
-			GEngine->AddOnScreenDebugMessage(
-				-1,
-				2.f,
-				FColor::Green,
-				FString::Printf(TEXT("%f"), CountdownTime)
-			);
-		}
-		if (CountdownTime <= 0.f)
-		{
-			StartMiniGameMatch();
-			bStartCountdown = false;
-		}
-	}
-}
-
 void AMiniGameGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
@@ -58,15 +36,7 @@ void AMiniGameGameModeBase::ServerPlayerLodaded_Implementation()
 
 	if (LoadedPlayersQuantity >= MiniGameGameInstance->PlayersInGameWhenMatchStarted)
 	{
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(
-				-1,
-				15.f,
-				FColor::Green,
-				"Bateu a quatidade"
-			);
-		}
 		bStartCountdown = true;
+		StartTimer.Broadcast();
 	}
 }
