@@ -17,6 +17,21 @@ void AMiniGameGameModeBase::StartMiniGameMatch()
 			"StartMiniGameMatch"
 		);
 	}
+
+	bStartCountdown = false;
+}
+
+void AMiniGameGameModeBase::Tick(float DeltaTime)
+{
+	if (!bStartCountdown) return;
+
+	float TimeLeft = .0f;
+	TimeLeft = MiniGameStartTime - GetWorld()->GetTimeSeconds() + LevelStartingTime;
+
+	if (TimeLeft <= 0)
+	{
+		StartMiniGameMatch();
+	}
 }
 
 void AMiniGameGameModeBase::BeginPlay()

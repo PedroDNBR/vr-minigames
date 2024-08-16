@@ -41,6 +41,8 @@ void ACountdownWorldWidgetActor::Tick(float DeltaTime)
 	}
 	if (OwnerPlayerState == nullptr || !OwnerPlayerState) return;
 
+	if (!OwnerPlayerState->bStartCountdown) return;
+
 	float TimeLeft = 0.f;
 	TimeLeft = OwnerPlayerState->MiniGameStartTime - OwnerPlayerState->GetServerTime() + OwnerPlayerState->LevelStartingTime;
 

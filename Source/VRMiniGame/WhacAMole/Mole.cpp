@@ -32,7 +32,6 @@ void AMole::BeginPlay()
 	StartHeight = UKismetMathLibrary::Conv_DoubleToInt64(Mesh->GetRelativeLocation().Z);
 
 	SetState(EMoleState::EMS_Idle);
-	Ascend();
 }
 
 void AMole::Ascend()
@@ -169,4 +168,9 @@ void AMole::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimePro
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(AMole, State);
+}
+
+void AMole::StartMole()
+{
+	Descended();
 }

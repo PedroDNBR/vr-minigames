@@ -23,6 +23,7 @@ public:
 
 	float ClientServerDelta = 0.f;
 	float SingleTripTime = 0.f;
+	bool bStartCountdown = false;
 
 	UPROPERTY(BlueprintReadOnly)
 	float MiniGameStartTime = 0.f;
@@ -40,7 +41,13 @@ public:
 	void ServerCheckMatchState();
 
 	UFUNCTION(Client, Reliable)
-	void ClientJoinMidgame(float MiniGameStart, float LevelStarting);
+	void ClientJoinMidgame(float MiniGameStart, float LevelStarting, bool StartCountdown);
+
+	UFUNCTION(Server, Reliable)
+	void ServerStartTimer();
+
+	UFUNCTION(Client, Reliable)
+	void ClientStartTimer();
 
 private:
 	UPROPERTY()

@@ -27,6 +27,7 @@ public:
 	AMole();
 	virtual void Tick(float DeltaTime) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	void StartMole();
 
 protected:
 	virtual void BeginPlay() override;

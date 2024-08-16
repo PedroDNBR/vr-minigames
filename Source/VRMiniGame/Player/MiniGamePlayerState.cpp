@@ -12,7 +12,6 @@ void AMiniGamePlayerState::BeginPlay()
 		GameState->AddPlayerToPlayerScores(this);
 	}
 	ServerCheckMatchState();
-
 }
 
 void AMiniGamePlayerState::AddToScore(float ScoreAmount)
@@ -28,10 +27,21 @@ float AMiniGamePlayerState::GetServerTime()
 	else return GetWorld()->GetTimeSeconds() + ClientServerDelta;
 }
 
-void AMiniGamePlayerState::ClientJoinMidgame_Implementation(float MiniGameStart, float LevelStarting)
+void AMiniGamePlayerState::ServerStartTimer_Implementation()
+{
+	ClientStartTimer();
+}
+
+void AMiniGamePlayerState::ClientStartTimer_Implementation()
+{
+	bStartCountdown = true;
+}
+
+void AMiniGamePlayerState::ClientJoinMidgame_Implementation(float MiniGameStart, float LevelStarting, bool StartCountdown)
 {
 	MiniGameStartTime = MiniGameStart;
 	LevelStartingTime = LevelStarting; 
+	bStartCountdown = StartCountdown;
 
 	// chama função
 }
@@ -41,9 +51,12 @@ void AMiniGamePlayerState::ServerCheckMatchState_Implementation()
 	AMiniGameGameModeBase* GameMode = Cast<AMiniGameGameModeBase>(UGameplayStatics::GetGameMode(this));
 	if (GameMode)
 	{
+		GameMode->StartTimer.AddDynamic(this, &AMiniGamePlayerState::ServerStartTimer);
 		MiniGameStartTime = GameMode->MiniGameStartTime;
 		LevelStartingTime = GameMode->LevelStartingTime;
-		ClientJoinMidgame(MiniGameStartTime, LevelStartingTime);
+		bStartCountdown = GameMode->bStartCountdown;
+
+		ClientJoinMidgame(MiniGameStartTime, LevelStartingTime, bStartCountdown);
 	}
 }
 

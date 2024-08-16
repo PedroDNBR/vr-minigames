@@ -28,11 +28,12 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FStartTimer StartTimer;
 
-protected:
-	virtual void BeginPlay() override;
-
 	bool bStartCountdown = false;
 
+	virtual void Tick(float DeltaTime) override;
+
+protected:
+	virtual void BeginPlay() override;
 
 private:
 	int32 LoadedPlayersQuantity;
